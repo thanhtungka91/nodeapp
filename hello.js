@@ -1,10 +1,18 @@
-var express = require('express')
-var app = express()
+var connect = require('connect'),
+    http = require('http');
 
-app.get('/', function (req, res) {
-  res.send('Hello World!')
-})
+var app = connect()
+    .use(function(req, res, next) {
+        console.log("That's my first middleware");
+        next();
+    })
+    .use(function(req, res, next) {
+        console.log("That's my second middleware");
+        next();
+    })
+    .use(function(req, res, next) {
+        console.log("end");
+        res.end("hello world");
+    });
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-})
+http.createServer(app).listen(3000);
