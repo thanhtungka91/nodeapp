@@ -1,3 +1,5 @@
+var config = require('./config')();
+
 var connect = require('connect'),
     http = require('http');
 
@@ -15,4 +17,6 @@ var app = connect()
         res.end("hello world");
     });
 
-http.createServer(app).listen(3000);
+http.createServer(app).listen(config.port, function(){
+    console.log('Express server listening on port ' + config.port);
+});
