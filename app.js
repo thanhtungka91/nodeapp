@@ -8,8 +8,9 @@ var express = require('express'),
 	path = require('path'),
 	config = require('./config')(),
 	app = express(),
-	MongoClient = require('mongodb').MongoClient,
+	// MongoClient = require('mongodb').MongoClient,
 	Admin = require('./controllers/admin');
+    mongoose = require('mongoose');
 	// Home = require('./controllers/Home'),
 	// Blog = require('./controllers/Blog'),
 	// Page = require('./controllers/Page');
@@ -33,7 +34,8 @@ if ('development' == app.get('env')) {
   	app.use(express.errorHandler());
 }
 
-MongoClient.connect('mongodb://' + config.mongo.host + ':' + config.mongo.port + '/fastdelivery', function(err, db) {
+// MongoClient.connect('mongodb://' + config.mongo.host + ':' + config.mongo.port + '/fastdelivery', function(err, db) {
+mongoose.connect('mongodb://' + config.mongo.host + ':' + config.mongo.port + '/fastdelivery', function(err, db) {
 	if(err) {
 		console.log('Sorry, there is no mongo db server running.');
 	} else {
